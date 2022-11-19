@@ -10,6 +10,41 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+namespace naive
+{
+    int fun(vector<int> &vec)
+    {
+    int max_ = INT_MIN; //----- O(1)
+
+    for(int i = 0; i < vec.size(); ++i)
+    {
+            for(int j = i; j < vec.size(); j++ )
+            {
+                if(vec[i] <= vec[j])
+                {
+                    int num = vec[j];
+                    if(num > max_)
+                    max_ = num;
+                }
+            }
+    }
+
+    return max_; //---O(1)
+    }
+    //o(N^2)
+}
+
+namespace little_better
+{
+    int fun(vector<int> &vec)
+    {
+        sort(vec.begin(), vec.end());//n logn 
+
+        return vec[vec.size() - 1];
+    }
+
+}
+
 namespace normal
 {
     int fun(vector<int> &vec)
@@ -43,5 +78,5 @@ int main()
 
     cout << normal::fun(vec) << endl;
     cout << using_stl::fun(vec) << endl;
-    
+    cout << little_better::fun(vec) << endl;
 }
